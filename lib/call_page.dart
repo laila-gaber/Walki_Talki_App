@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
 
-class CallPage extends StatelessWidget {
-  String name="Laila";
+class CallPage extends StatefulWidget {
+  @override
+  State<CallPage> createState() => _CallPageState();
+
+}
+
+class _CallPageState extends State<CallPage> {
+  String ?name;
+  bool ?talking=false;
+  Widget? talkiicon;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    talking=true;
+    name="laila";
+    talkiicon=Icon(
+      size: 100,
+      Icons.mic,
+      color: Colors.green,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -32,13 +53,46 @@ class CallPage extends StatelessWidget {
             ),
            // SizedBox(height: 100,),
             Expanded(
-              child: CircleAvatar(
-                radius: 100,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  size: 100,
-                  Icons.mic,
-                  color: Colors.green,
+              child: GestureDetector(
+                 onTap: ()
+                {
+                  setState(() {
+                    if(name=="laila")
+                      {
+                        name="Ahmed";
+                      }
+                    else
+                      {
+                        name="laila";
+                      }
+                    if(talking!)
+                      {
+                        print(talking);
+                        talking=false;
+                        talkiicon=Icon(
+                          size: 100,
+                          Icons.mic,
+                          color: Colors.green,
+                        );
+
+                      }
+                    else
+                      {
+                        talking=true;
+                        talkiicon=Icon(
+                          size: 100,
+                          Icons.headphones,
+                          color: Colors.red[900],
+                        );
+
+                      }
+                    print(name);
+                  });
+                },
+                child: CircleAvatar(
+                  radius: 100,
+                  backgroundColor: Colors.white,
+                  child: talkiicon
                 ),
               ),
             ),
